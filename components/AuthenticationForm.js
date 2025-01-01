@@ -3,12 +3,13 @@ import Input from './UI/Input';
 import { useState } from 'react';
 import Button from './UI/Button';
 
-export default function AuthenticationForm({isLogin, onSubmit}){
+export default function AuthenticationForm({isLogin, onSubmit, credentialsInvalid}){
     const [enteredEmail, setEnteredEmail] = useState('');
     const [reEnteredEmail, setReEnteredEmail] = useState('');
     const [enteredPassword, setEnteredPassword] = useState('');
     const [reEnteredPassword, setReEnteredPassword] = useState('');
 
+    // generic procedure of handling the state updating using the switch case. 
     function updateInputValuesHandler(identifier, enteredInput){
         switch(identifier){
             case 'email':
@@ -26,6 +27,7 @@ export default function AuthenticationForm({isLogin, onSubmit}){
         }
     }
 
+    // using the onSubmit prop to pass the entered input values to pass between the components.
     function submitHandler(){
         onSubmit({
             email: enteredEmail,
@@ -35,6 +37,7 @@ export default function AuthenticationForm({isLogin, onSubmit}){
         });
     }
 
+    // collecting the credential values as a prop so that it is easy to handle the validations.
     const {
         email: emailIsInvalid,
         confirmEmail: emailsDontMatch,
@@ -77,7 +80,7 @@ export default function AuthenticationForm({isLogin, onSubmit}){
                 value={reEnteredPassword}
                 isInvalid={passwordDontMatch}
             />
-            <View>
+            <View style={styles.button}>
                 <Button
                     onPress={submitHandler}
                 >
@@ -90,5 +93,7 @@ export default function AuthenticationForm({isLogin, onSubmit}){
 }
 
 const styles = StyleSheet.create({
-
+    button:{
+        marginTop: 10,
+    }
 });
