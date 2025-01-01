@@ -1,13 +1,5 @@
-import {View, Text, StyleSheet} from 'react-native';
+import AuthenticationContent from "../components/AuthenticationContent";
 
 export default function SignupScreen(){
-    return(
-        <View>
-            <Text>This is signup component</Text>
-        </View>
-        );
+    return(<AuthenticationContent />);
 }
-
-const styles = StyleSheet.create({
-
-});
