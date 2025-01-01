@@ -1,23 +1,34 @@
+import { useState } from "react";
 import { View, StyleSheet, Alert } from "react-native";
 import AuthenticationForm from "./AuthenticationForm";
 import FlatButton from "./UI/FlatButton";
 import { Colors } from "../constants/colors";
+import { useNavigation } from "@react-navigation/native";
 
 export default function AuthenticationContent({isLogin, onAuthenticate}){
 
-    function switchAuthentication(){
+    const navigation = useNavigation();
 
+    const [invalidCredentials, setInvalidCredentials] = useState({
+        email: false,
+        confirmEmail: false,
+        password: false,
+        confirmPassword: false
+    });
+
+    function switchAuthentication(){
+        if(isLogin){
+            // navigation.navigate('Signup');
+            navigation.replace('Signup');
+        }
+        else{
+            // navigation.navigate('Login');
+            navigation.replace('Login');
+        }
     }
 
-    function submitHandler(){
+    function submitHandler(credentials){
         let {email, confirmEmail, password, confirmPassword} = credentials;
-
-        const [invalidCredentials, setInvalidCredentials] = useState({
-            email: false,
-            confirmEmail: false,
-            password: false,
-            confirmPassword: false
-        });
 
         email = email.trim();
         password =  password.trim();
@@ -47,7 +58,7 @@ export default function AuthenticationContent({isLogin, onAuthenticate}){
                 credentialsInvalid={invalidCredentials}
             />
             <View style={styles.button}>
-                <FlatButton onPress={switchAuthentication}>{isLogin ? 'Create a new user' : 'Login'}</FlatButton>
+                <FlatButton onPress={switchAuthentication}>{isLogin ? 'Create a new user' : 'Login user'}</FlatButton>
             </View>
         </View>
     );
@@ -67,6 +78,6 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
     },
     button:{
-        marginTop: 6,
+        marginTop: 8,
     }
 });

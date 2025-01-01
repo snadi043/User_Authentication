@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     input:{
         padding: 8,
         backgroundColor: Colors.primary500,
-        borderRadius: 6,
+        borderRadius: 8,
         fontSize: 16,
     },
     inputIsInvalid:{

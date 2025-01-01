@@ -94,6 +94,6 @@ export default function AuthenticationForm({isLogin, onSubmit, credentialsInvali
 
 const styles = StyleSheet.create({
     button:{
-        marginTop: 10,
+        marginTop: 12,
     }
 });
