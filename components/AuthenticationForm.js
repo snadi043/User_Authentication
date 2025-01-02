@@ -56,7 +56,8 @@ export default function AuthenticationForm({isLogin, onSubmit, credentialsInvali
                 value={enteredEmail}
                 isInvalid={emailIsInvalid}
             />
-            <Input 
+            {!isLogin && (
+                <Input 
                 label="Re-Enter E-mail Address"
                 onInputValueChange={updateInputValuesHandler.bind(this, 're-enterEmail')}
                 keyboardType='email-address'
@@ -64,6 +65,7 @@ export default function AuthenticationForm({isLogin, onSubmit, credentialsInvali
                 value={reEnteredEmail}
                 isInvalid={emailsDontMatch}
             />
+            )}
             <Input 
                 label="Password"
                 onInputValueChange={updateInputValuesHandler.bind(this, 'password')}
@@ -72,7 +74,8 @@ export default function AuthenticationForm({isLogin, onSubmit, credentialsInvali
                 value={enteredPassword}
                 isInvalid={passwordIsInvalid}
             />
-            <Input 
+            {!isLogin && (
+                <Input 
                 label="Re-enter Password"
                 onInputValueChange={updateInputValuesHandler.bind(this, 're-enterPassword')}
                 keyboardType='default'
@@ -80,6 +83,7 @@ export default function AuthenticationForm({isLogin, onSubmit, credentialsInvali
                 value={reEnteredPassword}
                 isInvalid={passwordDontMatch}
             />
+            )}
             <View style={styles.button}>
                 <Button
                     onPress={submitHandler}
