@@ -10,6 +10,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Colors } from './constants/colors';
 
+import AuthenticationContent from './components/AuthenticationContent';
+
 const Stack = createStackNavigator();
 
 function AuthStack(){
@@ -43,9 +45,11 @@ function AuthenticatedStack(){
 
 function Navigation(){
   return(
-    <NavigationContainer>
-      <AuthStack/>
-    </NavigationContainer>
+    <AuthenticationContent>
+      <NavigationContainer>
+        <AuthStack/>
+      </NavigationContainer>
+    </AuthenticationContent>
   )
 }
 
