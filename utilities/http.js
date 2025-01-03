@@ -11,15 +11,16 @@ export async function authenticateUser(mode, email, password){
         password: password,
         returnSecureToken: true,
     });
-    // console.log(response.data);
+    const token = response.data.idToken;
+    return token;
 }
 
-export async function createUser(email, password){
-    authenticateUser('signUp', email, password);
+export function createUser(email, password){
+   return authenticateUser('signUp', email, password);
 }
 
-export async function loginUser(email, password){
-    authenticateUser('signInWithPassword', email, password);
+export function loginUser(email, password){
+    return authenticateUser('signInWithPassword', email, password);
 }
 
 
