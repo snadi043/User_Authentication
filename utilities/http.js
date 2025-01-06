@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_KEY = 'AIzaSyCYoCUYO3TGavCfKzmD61nCtj_MX84tfwQ';
 
-export async function authenticateUser(mode, email, password){
+async function authenticateUser(mode, email, password){
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:${mode}?key=${API_KEY}`;
     
     const response = await axios.post(url, 
@@ -12,6 +12,7 @@ export async function authenticateUser(mode, email, password){
         returnSecureToken: true,
     });
     const token = response.data.idToken;
+    console.log(token);
     return token;
 }
 

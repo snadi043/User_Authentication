@@ -21,12 +21,12 @@ export default function LoginScreen(){
             }
             catch(error){
                 Alert.alert('Authentication failed.', 'Could not log users in. Please check your input credentials');
+                setIsAuthenticating(false);
             }
-            setIsAuthenticating(false);
         }
         if(isAuthenticating){
             return <LoadingOverlay message="Logging User in..."/>
         }
 
-    return(<AuthenticationContent isLogin onAuthenticate={LoginHandler}/>);
+    return <AuthenticationContent isLogin onAuthenticate={LoginHandler}/>;
 }

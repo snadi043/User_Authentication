@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+// import 'react-native-gesture-handler';
 
 import { StatusBar } from 'expo-status-bar';
 
@@ -10,7 +10,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Colors } from './constants/colors';
 
-import AuthenticationContent from './components/AuthenticationContent';
+import AuthContextProvider, { AuthContext } from './store/auth-context';
+import { useContext } from 'react';
 
 const Stack = createStackNavigator();
 
@@ -43,13 +44,14 @@ function AuthenticatedStack(){
   );
 }
 
+
 function Navigation(){
+  const authCtx = useContext(AuthContext);
   return(
-    <AuthenticationContent>
       <NavigationContainer>
-        <AuthStack/>
+        {!authCtx.isAuthenticated && <AuthStack/>}
+        {authCtx.isAuthenticated && <AuthenticatedStack />}
       </NavigationContainer>
-    </AuthenticationContent>
   )
 }
 
@@ -57,8 +59,11 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <Navigation/>
+        <AuthContextProvider>
+          <Navigation/>
+        </AuthContextProvider>
     </>
+      
   );
 }
 
