@@ -1,4 +1,5 @@
 // import 'react-native-gesture-handler';
+import { useContext, useEffect, useState } from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 
@@ -12,7 +13,10 @@ import {IconButton} from './components/UI/IconButton';
 import { Colors } from './constants/colors';
 
 import AuthContextProvider, { AuthContext } from './store/auth-context';
-import { useContext } from 'react';
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AppLoading from 'expo-app-loading';
+
 
 const Stack = createStackNavigator();
 
@@ -50,7 +54,6 @@ function AuthenticatedStack(){
   );
 }
 
-
 function Navigation(){
   const authCtx = useContext(AuthContext);
   return(
@@ -61,12 +64,35 @@ function Navigation(){
   )
 }
 
+
+function Root(){
+  const authCtx = useContext(AuthContext);
+
+  const [isTryingLogin, setIsTryingLogin] = useState(true);
+
+  useEffect(() => {
+    async function fetchedToken(){
+        const storedToken = await AsyncStorage.getItem('token');
+        if(storedToken){
+            authCtx.authenticate(storedToken);
+        }
+        setIsTryingLogin(false);
+    }
+    fetchedToken();
+  },[]);
+
+  if(isTryingLogin){
+    return <AppLoading/>;
+  }
+  return <Navigation/>
+}
+
 export default function App() {
   return (
     <>
       <StatusBar style="light" />
         <AuthContextProvider>
-          <Navigation/>
+          <Root/>
         </AuthContextProvider>
     </>
       
