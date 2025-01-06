@@ -4,6 +4,8 @@ const API_KEY = 'AIzaSyCYoCUYO3TGavCfKzmD61nCtj_MX84tfwQ';
 
 async function authenticateUser(mode, email, password){
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:${mode}?key=${API_KEY}`;
+
+   // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
     
     const response = await axios.post(url, 
     {
@@ -12,7 +14,7 @@ async function authenticateUser(mode, email, password){
         returnSecureToken: true,
     });
     const token = response.data.idToken;
-    console.log(token);
+    // console.log(token);
     return token;
 }
 

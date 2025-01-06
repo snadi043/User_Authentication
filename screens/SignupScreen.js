@@ -26,7 +26,7 @@ export default function SignupScreen(){
         }
     }
     if(isAuthenticating){
-        return <LoadingOverlay message="Creating User..."/>
+        return <LoadingOverlay message="Creating User..."/>;
     }
     return(<AuthenticationContent onAuthenticate={SignupHandler}/>);
 }

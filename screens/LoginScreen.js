@@ -25,7 +25,7 @@ export default function LoginScreen(){
             }
         }
         if(isAuthenticating){
-            return <LoadingOverlay message="Logging User in..."/>
+            return <LoadingOverlay message="Logging User in..."/>;
         }
 
     return <AuthenticationContent isLogin onAuthenticate={LoginHandler}/>;
